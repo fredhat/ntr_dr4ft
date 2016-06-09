@@ -20,6 +20,21 @@ function selectRarity(set) {
   return set.common
 }
 
+function pickFoil(set) {
+  var rngFoil = _.rand(6)
+  if (rngFoil < 1)
+    if (set.mythic)
+      if (_.rand(set.mythic.length + set.rare.length) < set.mythic.length)
+        return set.mythic
+      else
+        return set.rare
+    else
+      return set.rare
+  if (rngFoil < 3)
+    return set.uncommon
+  return set.common
+}
+
 function toPack(code) {
   var set = Sets[code]
   var {common, uncommon, rare, mythic, special, size} = set
@@ -57,11 +72,17 @@ function toPack(code) {
       ? special.gate
       : special.shock
     break
+  case 'EMA':
+    special = selectRarity(set)
+    var foilCard = true
+    break
   case 'MMA':
     special = selectRarity(set)
+    var foilCard = true
     break
   case 'MM2':
     special = selectRarity(set)
+    var foilCard = true
     break
   case 'VMA':
     //http://www.wizards.com/magic/magazine/article.aspx?x=mtg/daily/arcana/1491
@@ -101,22 +122,35 @@ function toPack(code) {
     break
   }
 
-  if (special)
-    pack.push(_.choose(1, special))
-
-  return toCards(pack, code)
+  if (special) {
+    var specialpick = _.choose(1, special)
+    pack.push(specialpick)
+    if (foilCard) {
+      foilCard = specialpick
+    }
+  }
+  //insert foil
+  if (_.rand(6) < 1 && !(foilCard)) {
+    var foilCard = _.choose(1, pickFoil(set))
+    pack.push(foilCard)
+  }
+  return toCards(pack, code, foilCard)
 }
 
-function toCards(pool, code) {
+function toCards(pool, code, foilCard) {
   var isCube = !code
   return pool.map(cardName => {
     var card = Object.assign({}, Cards[cardName])
-
     var {sets} = card
     if (isCube)
       [code] = Object.keys(sets)
     card.code = mws[code] || code
     var set = sets[code]
+    card.foil = false
+    if (foilCard == cardName.toString().toLowerCase()) {
+      card.foil = true
+      foilCard = ''
+    }
     delete card.sets
     return Object.assign(card, set)
   })
