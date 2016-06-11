@@ -148,6 +148,7 @@ function row(p, i) {
   let readyCheckbox
     = i === self ? d.input({
         checked: p.isReadyToStart,
+        disabled: true,
         onChange: App._emit('readyToStart'),
         type: 'checkbox',
       })
