@@ -1,9 +1,10 @@
 {
-  "name": "draft",
-  "version": "0.2.0",
+  "name": "draft.netrunner",
+  "version": "0.0.1",
   "description": "game client/server",
-  "author": "James Campos <james.r.campos@gmail.com>",
-  "repository": "aeosynth/draft",
+  "author": "Fedor Sosin <fsosin0@gmail.com>",
+  "repository": "fredhat/ntr_dr4ft",
+  "license": "MIT",
   "dependencies": {
     "ee": "git://github.com/aeosynth/ee",
     "engine.io": "^1.4.1",

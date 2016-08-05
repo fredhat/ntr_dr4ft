@@ -2,19 +2,19 @@ let d = React.DOM
 
 export let STRINGS = {
   BRANDING: {
-    SITE_NAME: ['drafts', 'ninja'],
-    DEFAULT_USERNAME: 'ninja',
+    SITE_NAME: ['draft', 'netrunner'],
+    DEFAULT_USERNAME: 'user',
   },
 
   PAGE_SECTIONS: {
     MOTD: null, // message of the day; can be a React element
 
     FOOTER: d.div({},
-      d.strong({}, 'drafts.ninja'),
+      d.strong({}, 'draft.netrunner'),
       ' is a fork of the ',
-      d.code({}, 'draft'),
-      ' project by aeosynth. Contributions welcome! ',
-      d.a({ href: 'https://github.com/arxanas/drafts.ninja' },
-        'https://github.com/arxanas/drafts.ninja')),
+      d.code({}, 'dr4ft'),
+      ' project by tritoch. Contributions welcome! ',
+      d.a({ href: 'https://github.com/tritoch/dr4ft' },
+        'https://github.com/tritoch/dr4ft')),
   },
 }

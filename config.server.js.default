@@ -21,11 +21,11 @@ const VERSION =
   : versionInfo
 
 module.exports = {
-  PORT: 1337,
+  PORT: 3000,
   VERSION,
   STRINGS: {
     BRANDING: {
-      DEFAULT_USERNAME: 'ninja',
+      DEFAULT_USERNAME: 'user',
     }
   }
 }
